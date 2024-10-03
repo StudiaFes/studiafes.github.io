@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudiaFes</title>
     <script src="/components/student-exam-card.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.min.css">
@@ -24,9 +25,10 @@
     </nav>
     <div class="container-fluid dynamic-margin">
         <ul class="list-group overflow-auto mt-2 pb-2 scrollable-list">
-            <li class="list- group-item border-0"><student-exam-card title="GianSofia"
-                    subtitle="studentessa secondo anno"
-                    text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card></li>
+            <li class="list- group-item border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <student-exam-card title="GianSofia" subtitle="studentessa secondo anno"
+                    text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card>
+            </li>
             <li class="list- group-item border-0"><student-exam-card title="Marco Marchini"
                     subtitle="Dopo si va a fare ape" text="Ripasso esercizi su sommatorie"></student-exam-card></li>
             <li class="list- group-item border-0"><student-exam-card title="PierDante" subtitle="Ho una gemella"
@@ -47,6 +49,23 @@
                     text="ripasso per orale"></student-exam-card></li>
         </ul>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <div class="container-fluid d-flex justify-content-around">
             <button type="button" class="btn btn-light">
@@ -61,6 +80,7 @@
         </div>
     </nav>
     <script>
+
         function setScrollableListMaxHeight() {
             // Get the height of the top navbar
             const topNavbar = document.querySelector('.navbar.fixed-top');
@@ -80,10 +100,12 @@
             }
             const containerFluid = document.querySelector('.dynamic-margin');
             if (containerFluid) {
-                containerFluid.style.marginTop = `${topNavbarHeight+2}px`;
-                containerFluid.style.marginBottom = `${bottomNavbarHeight+2}px`;
+                containerFluid.style.marginTop = `${topNavbarHeight + 2}px`;
+                containerFluid.style.marginBottom = `${bottomNavbarHeight + 2}px`;
             }
         }
+
+
 
         // Call the function on page load
         window.addEventListener('load', setScrollableListMaxHeight);
