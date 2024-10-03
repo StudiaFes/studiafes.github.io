@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudiaFes</title>
     <script src="../../js/centered-div.js"></script>
+    <script src="/html/mainpage/components/student-exam-card.js"></script>
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -17,11 +18,21 @@
 </head>
 
 <body>
+    <div class="container-fluid mt-5 d-flex flex-column">
+        <student-exam-card class="mb-2" title="Analisi 1" subtitle="Pinco pallino"
+            text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card>
+        <student-exam-card class="mb-2" title="Giurisprudenza" subtitle="Marco Marchini"
+            text="Ripasso diritto civile prima dell'orale"></student-exam-card>
+        <student-exam-card class="mb-2" title="Meccanica razionale" subtitle="PierGiannino"
+            text="Qualcuno mi spieghi come funzioni il moto su un piano inclinato"></student-exam-card>
+        <student-exam-card class="mb-2" title="Anatomia" subtitle="Lugi di Arimanno"
+            text="Studio dell'epiglottide"></student-exam-card>
+    </div>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <div class="container-fluid d-flex justify-content-around">
             <button type="button" class="btn btn-light">
                 <i class="bi bi-house fs-2"></i>
-              </button>
+            </button>
             <button type="button" class="btn btn-light">
                 <span class="navbar-toggler-icon"></span>
             </button>
