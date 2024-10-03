@@ -9,18 +9,43 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.min.css">
+    <style>
+        /* Ensure the list doesn't overflow into the navbar */
+        .scrollable-list {
+            max-height: calc(100vh - 60px); /* Adjust 60px based on navbar height */
+            overflow-y: auto;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container-fluid mt-5 d-flex flex-column">
-        <student-exam-card class="mb-2" title="Analisi 1" subtitle="Pinco pallino"
-            text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card>
-        <student-exam-card class="mb-2" title="Giurisprudenza" subtitle="Marco Marchini"
-            text="Ripasso diritto civile prima dell'orale"></student-exam-card>
-        <student-exam-card class="mb-2" title="Meccanica razionale" subtitle="PierGiannino"
-            text="Qualcuno mi spieghi come funzioni il moto su un piano inclinato"></student-exam-card>
-        <student-exam-card class="mb-2" title="Anatomia" subtitle="Lugi di Arimanno"
-            text="Studio dell'epiglottide"></student-exam-card>
+    <div class="container-fluid">
+        <ul class="list-group overflow-auto mt-2 pb-2 scrollable-list">
+            <li class="list- group-item border-0"><student-exam-card title="Analisi 1" subtitle="Pinco pallino"
+                    text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Giurisprudenza" subtitle="Marco Marchini"
+                    text="Ripasso diritto civile prima dell'orale"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Meccanica razionale" subtitle="PierGiannino"
+                    text="Qualcuno mi spieghi come funzioni il moto su un piano inclinato"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Anatomia" subtitle="Lugi di Arimanno"
+                    text="Studio dell'epiglottide"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Analisi 1" subtitle="Pinco pallino"
+                    text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Giurisprudenza" subtitle="Marco Marchini"
+                    text="Ripasso diritto civile prima dell'orale"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Meccanica razionale" subtitle="PierGiannino"
+                    text="Qualcuno mi spieghi come funzioni il moto su un piano inclinato"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Anatomia" subtitle="Lugi di Arimanno"
+                    text="Studio dell'epiglottide"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Analisi 1" subtitle="Pinco pallino"
+                    text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Giurisprudenza" subtitle="Marco Marchini"
+                    text="Ripasso diritto civile prima dell'orale"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Meccanica razionale" subtitle="PierGiannino"
+                    text="Qualcuno mi spieghi come funzioni il moto su un piano inclinato"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Anatomia" subtitle="Lugi di Arimanno"
+                    text="Studio dell'epiglottide"></student-exam-card></li>
+        </ul>
     </div>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <div class="container-fluid d-flex justify-content-around">

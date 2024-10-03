@@ -25,7 +25,7 @@ class StudentExamCard extends HTMLElement {
       this.shadowRoot.innerHTML = `
                   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
   <script src="js/bootstrap.bundle.min.js"></script>
-        <div class="card">
+        <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">${title}</h5>
             <h6 class="card-subtitle mb-2 text-muted">${subtitle}</h6>
