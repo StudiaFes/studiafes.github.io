@@ -20,18 +20,18 @@ class DynamicSelectComponent extends HTMLElement {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
-            <label for="signup-form">${this.getAttribute('label')}</label>
-            <select class="form-select" aria-label="University choice" id="dynamic-select">
+            <label>${this.getAttribute('label')}</label>
+            <select class="form-select" aria-label="University choice">
             </select>
         `;
 
         // Reference to the select element
-        const selectElement = this.shadowRoot.querySelector("#dynamic-select")
+        const selectElement = this.shadowRoot.querySelector("select")
         var data = JSON.parse(this.getAttribute('data'))
         if (data != null) {
             this._addSelectData(data, selectElement)
         } else {
-            fetch('https://jsonplaceholder.typicode.com/users')
+            fetch(`${this.getAttribute('fetch-endpoint')}`)
                 .then(response => response.json())
                 .then(data => {
                     // Remove the "Caricamento..." option
@@ -65,7 +65,7 @@ class DynamicSelectComponent extends HTMLElement {
         data.forEach((university, index) => {
             const option = document.createElement('option')
             option.value = index
-            option.innerHTML = university
+            option.textContent = university
             if (index == 0) {
                 option.selected = true
             }
