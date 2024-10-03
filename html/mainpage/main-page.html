@@ -10,41 +10,41 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.min.css">
     <style>
-        /* Ensure the list doesn't overflow into the navbar */
         .scrollable-list {
-            max-height: calc(100vh - 60px); /* Adjust 60px based on navbar height */
             overflow-y: auto;
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <nav class="navbar navbar-light bg-light fixed-top">
+        <div class="container-fluid justify-content-center">
+            <span class="navbar-brand mb-0 h1">Analisi I</span>
+        </div>
+    </nav>
+    <div class="container-fluid dynamic-margin">
         <ul class="list-group overflow-auto mt-2 pb-2 scrollable-list">
-            <li class="list- group-item border-0"><student-exam-card title="Analisi 1" subtitle="Pinco pallino"
+            <li class="list- group-item border-0"><student-exam-card title="GianSofia"
+                    subtitle="studentessa secondo anno"
                     text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Giurisprudenza" subtitle="Marco Marchini"
-                    text="Ripasso diritto civile prima dell'orale"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Meccanica razionale" subtitle="PierGiannino"
-                    text="Qualcuno mi spieghi come funzioni il moto su un piano inclinato"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Anatomia" subtitle="Lugi di Arimanno"
-                    text="Studio dell'epiglottide"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Analisi 1" subtitle="Pinco pallino"
+            <li class="list- group-item border-0"><student-exam-card title="Marco Marchini"
+                    subtitle="Dopo si va a fare ape" text="Ripasso esercizi su sommatorie"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="PierDante" subtitle="Ho una gemella"
+                    text="ripasso per orale"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="GianSofia"
+                    subtitle="studentessa secondo anno"
                     text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Giurisprudenza" subtitle="Marco Marchini"
-                    text="Ripasso diritto civile prima dell'orale"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Meccanica razionale" subtitle="PierGiannino"
-                    text="Qualcuno mi spieghi come funzioni il moto su un piano inclinato"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Anatomia" subtitle="Lugi di Arimanno"
-                    text="Studio dell'epiglottide"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Analisi 1" subtitle="Pinco pallino"
+            <li class="list- group-item border-0"><student-exam-card title="Marco Marchini"
+                    subtitle="Dopo si va a fare ape" text="Ripasso esercizi su sommatorie"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="PierDante" subtitle="Ho una gemella"
+                    text="ripasso per orale"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="GianSofia"
+                    subtitle="studentessa secondo anno"
                     text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Giurisprudenza" subtitle="Marco Marchini"
-                    text="Ripasso diritto civile prima dell'orale"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Meccanica razionale" subtitle="PierGiannino"
-                    text="Qualcuno mi spieghi come funzioni il moto su un piano inclinato"></student-exam-card></li>
-            <li class="list- group-item border-0"><student-exam-card title="Anatomia" subtitle="Lugi di Arimanno"
-                    text="Studio dell'epiglottide"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="Marco Marchini"
+                    subtitle="Dopo si va a fare ape" text="Ripasso esercizi su sommatorie"></student-exam-card></li>
+            <li class="list- group-item border-0"><student-exam-card title="PierDante" subtitle="Ho una gemella"
+                    text="ripasso per orale"></student-exam-card></li>
         </ul>
     </div>
     <nav class="navbar fixed-bottom navbar-light bg-light">
@@ -60,6 +60,38 @@
             </button>
         </div>
     </nav>
+    <script>
+        function setScrollableListMaxHeight() {
+            // Get the height of the top navbar
+            const topNavbar = document.querySelector('.navbar.fixed-top');
+            const topNavbarHeight = topNavbar ? topNavbar.offsetHeight : 0;
+
+            // Get the height of the bottom navbar
+            const bottomNavbar = document.querySelector('.navbar.fixed-bottom');
+            const bottomNavbarHeight = bottomNavbar ? bottomNavbar.offsetHeight : 0;
+
+            // Calculate the available height for the scrollable list
+            const availableHeight = window.innerHeight - topNavbarHeight - bottomNavbarHeight;
+
+            // Set the max-height for the scrollable list
+            const scrollableList = document.querySelector('.scrollable-list');
+            if (scrollableList) {
+                scrollableList.style.maxHeight = `${availableHeight}px`;
+            }
+            const containerFluid = document.querySelector('.dynamic-margin');
+            if (containerFluid) {
+                containerFluid.style.marginTop = `${topNavbarHeight+2}px`;
+                containerFluid.style.marginBottom = `${bottomNavbarHeight+2}px`;
+            }
+        }
+
+        // Call the function on page load
+        window.addEventListener('load', setScrollableListMaxHeight);
+
+        // Recalculate the height if the window is resized
+        window.addEventListener('resize', setScrollableListMaxHeight);
+
+    </script>
 </body>
 
 </html>
