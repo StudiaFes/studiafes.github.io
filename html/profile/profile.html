@@ -6,42 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudiaFes</title>
     <script src="/components/student-exam-card.js"></script>
-    <script src="/components/contact-modal.js"></script>
     <script src="/components/dynamic-app-bar.js"></script>
+    <script src="/components/contact-modal.js"></script>
     <script src="/components/bottom-navbar.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.min.css">
-    <style>
-        .scrollable-list {
-            overflow-y: auto;
-        }
-    </style>
 </head>
 
 <body>
-    <dynamic-app-bar title="Analisi I"></dynamic-app-bar>
-    <div class="container-fluid dynamic-margin">
-        <ul class="list-group overflow-auto mt-2 pb-2 scrollable-list">
-            <li class="list- group-item border-0" data-bs-toggle="modal" data-bs-target="#contactModal"
-                data-bs-name="GianSofia" data-bs-surname="Marjini" data-bs-email="gian.sofia@example.com"
-                data-bs-phone="123-456-7890">
-                <student-exam-card title="GianSofia" subtitle="studentessa secondo anno"
-                    text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card>
-            </li>
-        </ul>
-    </div>
-    <contact-modal></contact-modal>
+    <dynamic-app-bar title="Nicola Musicco"></dynamic-app-bar>
     <bottom-nav></bottom-nav>
     <script>
-        function openPage(ref) {
-            // Construct the URL with the id as a query parameter
-            const profileUrl = ref;
 
-            // Navigate to the profile page
-            window.location.href = profileUrl;
-        }
         function setScrollableListMaxHeight() {
             // Get the height of the top navbar
             const topNavbar = document.querySelector('.navbar.fixed-top');
