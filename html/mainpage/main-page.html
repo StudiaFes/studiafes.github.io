@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudiaFes</title>
     <script src="/components/student-exam-card.js"></script>
+    <script src="/components/contact-modal.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
@@ -25,11 +26,13 @@
     </nav>
     <div class="container-fluid dynamic-margin">
         <ul class="list-group overflow-auto mt-2 pb-2 scrollable-list">
-            <li class="list- group-item border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <li class="list- group-item border-0" data-bs-toggle="modal" data-bs-target="#contactModal"
+                data-bs-name="John" data-bs-surname="Doe" data-bs-email="john.doe@example.com"
+                data-bs-phone="123-456-7890">
                 <student-exam-card title="GianSofia" subtitle="studentessa secondo anno"
                     text="Sto cercando di capire come funziona l'integrale di e^x"></student-exam-card>
             </li>
-            <li class="list- group-item border-0"><student-exam-card title="Marco Marchini"
+            <!-- <li class="list- group-item border-0"><student-exam-card title="Marco Marchini"
                     subtitle="Dopo si va a fare ape" text="Ripasso esercizi su sommatorie"></student-exam-card></li>
             <li class="list- group-item border-0"><student-exam-card title="PierDante" subtitle="Ho una gemella"
                     text="ripasso per orale"></student-exam-card></li>
@@ -46,11 +49,12 @@
             <li class="list- group-item border-0"><student-exam-card title="Marco Marchini"
                     subtitle="Dopo si va a fare ape" text="Ripasso esercizi su sommatorie"></student-exam-card></li>
             <li class="list- group-item border-0"><student-exam-card title="PierDante" subtitle="Ho una gemella"
-                    text="ripasso per orale"></student-exam-card></li>
+                    text="ripasso per orale"></student-exam-card></li> -->
         </ul>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <contact-modal></contact-modal>
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
@@ -65,7 +69,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <div class="container-fluid d-flex justify-content-around">
             <button type="button" class="btn btn-light">
@@ -111,8 +115,7 @@
         window.addEventListener('load', setScrollableListMaxHeight);
 
         // Recalculate the height if the window is resized
-        window.addEventListener('resize', setScrollableListMaxHeight);
-
+        window.addEventListener('resize', setScrollableListMaxHeight);        
     </script>
 </body>
 
