@@ -46,14 +46,6 @@ class ContactModal extends HTMLElement {
             document.querySelector('#phone').textContent = phone;
         });
     }
-
-    // Called when the component is added to the document
-    connectedCallback() {
-        const modal = new bootstrap.Modal(document.querySelector('#contactModal'));
-
-        // Trigger the modal when the component is connected
-        modal.show();
-    }
 }
 
 // Define the new web component
