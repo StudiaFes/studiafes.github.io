@@ -8,6 +8,7 @@
     <script src="/components/dynamic-app-bar.js"></script>
     <script src="/components/bottom-navbar.js"></script>
     <script src="/components/divider.js"></script>
+    <script src="/components/personal-info.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/max-height-scrollable-list.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
@@ -19,18 +20,7 @@
     <dynamic-app-bar title="Nicola Musicco"></dynamic-app-bar>
     <div class="container-fluid dynamic-margin">
         <div class="list-group" id="personal-data">
-            <div class="card list-group-item p-0">
-                <div class="card-header">
-                    Dati Personali
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item border-0">An item</li>
-                    <custom-divider width="w-75"></custom-divider>
-                    <li class="list-group-item border-0">A second item</li>
-                    <custom-divider width="w-75"></custom-divider>
-                    <li class="list-group-item border-0">A third item</li>
-                </ul>
-            </div>
+            <personal-info title="Dati personali" data='[{"icon": "bi bi-person", "text": "Nome", "value":"GianSofia Marjini"}, {"icon": "bi bi-envelope", "text": "Email", "value":"sofia.marjini@gmail.com"}, {"icon": "bi bi-telephone", "text": "Phone", "value":"+89 67854321"}]'></personal-info>
         </div>
     </div>
     <bottom-nav></bottom-nav>
