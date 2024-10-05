@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudiaFes</title>
-    <script src="/components/student-exam-card.js"></script>
     <script src="/components/dynamic-app-bar.js"></script>
-    <script src="/components/contact-modal.js"></script>
     <script src="/components/bottom-navbar.js"></script>
+    <script src="/components/divider.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/max-height-scrollable-list.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.min.css">
@@ -17,40 +17,32 @@
 
 <body>
     <dynamic-app-bar title="Nicola Musicco"></dynamic-app-bar>
+    <div class="container-fluid dynamic-margin">
+        <div class="list-group" id="personal-data">
+            <div class="card list-group-item p-0">
+                <div class="card-header">
+                    Dati Personali
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item border-0">An item</li>
+                    <custom-divider width="w-75"></custom-divider>
+                    <li class="list-group-item border-0">A second item</li>
+                    <custom-divider width="w-75"></custom-divider>
+                    <li class="list-group-item border-0">A third item</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <bottom-nav></bottom-nav>
     <script>
 
-        function setScrollableListMaxHeight() {
-            // Get the height of the top navbar
-            const topNavbar = document.querySelector('.navbar.fixed-top');
-            const topNavbarHeight = topNavbar ? topNavbar.offsetHeight : 0;
-
-            // Get the height of the bottom navbar
-            const bottomNavbar = document.querySelector('.navbar.fixed-bottom');
-            const bottomNavbarHeight = bottomNavbar ? bottomNavbar.offsetHeight : 0;
-
-            // Calculate the available height for the scrollable list
-            const availableHeight = window.innerHeight - topNavbarHeight - bottomNavbarHeight;
-
-            // Set the max-height for the scrollable list
-            const scrollableList = document.querySelector('.scrollable-list');
-            if (scrollableList) {
-                scrollableList.style.maxHeight = `${availableHeight}px`;
-            }
-            const containerFluid = document.querySelector('.dynamic-margin');
-            if (containerFluid) {
-                containerFluid.style.marginTop = `${topNavbarHeight + 2}px`;
-                containerFluid.style.marginBottom = `${bottomNavbarHeight + 2}px`;
-            }
-        }
-
-
+        const setter = setScrollableListMaxHeight('#personal-data', 10)
 
         // Call the function on page load
-        window.addEventListener('load', setScrollableListMaxHeight);
+        window.addEventListener('load', setter);
 
         // Recalculate the height if the window is resized
-        window.addEventListener('resize', setScrollableListMaxHeight);        
+        window.addEventListener('resize', setter);        
     </script>
 </body>
 

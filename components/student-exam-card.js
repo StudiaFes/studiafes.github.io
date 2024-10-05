@@ -23,8 +23,8 @@ class StudentExamCard extends HTMLElement {
   
       // Add Bootstrap styles and card structure inside the shadow DOM
       this.shadowRoot.innerHTML = `
-                  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-  <script src="js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <script src="js/bootstrap.bundle.min.js"></script>
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">${title}</h5>
