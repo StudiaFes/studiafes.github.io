@@ -19,8 +19,10 @@
 <body>
     <dynamic-app-bar title="Nicola Musicco"></dynamic-app-bar>
     <div class="container-fluid dynamic-margin">
-        <div class="list-group" id="personal-data">
+        <div class="list-group d-flex flex-column gap-5" id="personal-data">
             <personal-info title="Dati personali" data='[{"icon": "bi bi-person", "text": "Nome", "value":"GianSofia Marjini"}, {"icon": "bi bi-envelope", "text": "Email", "value":"sofia.marjini@gmail.com"}, {"icon": "bi bi-telephone", "text": "Phone", "value":"+89 67854321"}]'></personal-info>
+            <personal-info title="Esami in corso" data='[{"icon": "bi bi-book", "text": "Nome", "value":"Analisi 1"}, {"icon": "bi bi-book", "text": "Email", "value":"Meccanica Razionale"}]'></personal-info>
+            <personal-info title="Il mio team" data='[{"icon": "bi bi-backpack4", "text": "Nome", "value":"Math fanboys"}]'></personal-info>
         </div>
     </div>
     <bottom-nav></bottom-nav>

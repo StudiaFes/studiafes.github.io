@@ -62,7 +62,7 @@ class PersonalInfo extends HTMLElement {
 
             // Create the small icon for editing (Bootstrap icon bi-pencil-square)
             const smallIcon = document.createElement('i');
-            smallIcon.classList.add('bi', 'bi-pencil-square', 'opacity-50', 'text-nowrap');
+            smallIcon.classList.add('bi', 'bi-pencil-square');
 
             // Append the small icon to the content div
             contentDiv.appendChild(smallIcon);
