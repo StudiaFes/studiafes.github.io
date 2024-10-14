@@ -10,8 +10,8 @@ class BottomNav extends HTMLElement {
                     <button type="button" class="btn btn-light" id="home-button">
                         <i class="bi bi-house fs-2"></i>
                     </button>
-                    <button type="button" class="btn btn-light">
-                        <span class="navbar-toggler-icon"></span>
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#teamModalForm" data-bs-userid="123">
+                        <i class="bi bi-plus-circle fs-2"></i>
                     </button>
                     <button type="button" class="btn btn-light" id="profile-button">
                         <i class="bi bi-person fs-2"></i>

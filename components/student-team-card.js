@@ -1,14 +1,9 @@
-class StudentExamCard extends HTMLElement {
+class StudentTeamCard extends HTMLElement {
     constructor() {
       super();
       // Attach shadow DOM
       this.attachShadow({ mode: 'open' });
     }
-  
-    // Observe the attributes for title, subtitle, and text
-    // static get observedAttributes() {
-    //   return ['title', 'subtitle', 'text'];
-    // }
   
     // Called when the component is added to the DOM
     connectedCallback() {
@@ -51,5 +46,5 @@ class StudentExamCard extends HTMLElement {
   }
   
   // Register the custom element
-  customElements.define('student-team-card', StudentExamCard);
+  customElements.define('student-team-card', StudentTeamCard);
   
