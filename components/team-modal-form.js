@@ -1,14 +1,14 @@
 class TeamModalForm extends HTMLElement {
-    constructor() {
-      super();
-    }
-  
-    connectedCallback() {
-      this.render();
-    }
-  
-    render() {
-      const modalHTML = `
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
+  render() {
+    const modalHTML = `
         <div class="modal fade" id="teamModalForm" tabindex="-1" aria-labelledby="teamModalFormLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -50,101 +50,102 @@ class TeamModalForm extends HTMLElement {
           </div>
         </div>
       `;
-  
-      // Append the modal HTML to the document body
-      document.body.insertAdjacentHTML('beforeend', modalHTML);
-  
-      const modalElement = document.getElementById('teamModalForm');
-      const form = document.getElementById('studentForm');
-      const titleInput = form.querySelector('#titleInput');
-      const universityInput = form.querySelector('#universityInput');
-      const majorInput = form.querySelector('#majorInput');
-      const professorInput = form.querySelector('#professorInput');
-      const progressBar = modalElement.querySelector('.progress-bar');
-      const progressFooter = modalElement.querySelector('#progressFooter');
-  
-      modalElement.addEventListener('show.bs.modal', (event) => {
-        const button = event.relatedTarget;
-        this.userId = button.getAttribute('data-bs-userid');
-        
-        titleInput.value = '';
-        universityInput.value = '';
-        majorInput.value = '';
-        professorInput.value = '';
-      });
-  
-      // Form submission handling
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-  
-        const data = {
-          title: titleInput.value,
-          university: universityInput.value,
-          major: majorInput.value,
-          professor: professorInput.value,
-        };
-  
-        // Show the progress bar and set it to 50%
-        progressFooter.style.display = 'block';
-        progressBar.style.width = '50%';
-        progressBar.setAttribute('aria-valuenow', '50');
-  
-        // Send form data with the userId as part of the URL path
-        try {
-          const response = await fetch(`https://your-api-url.com/users/${this.userId}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          });
-  
-          const bootstrapModal = bootstrap.Modal.getInstance(modalElement);
-  
-          if (response.ok) {
-            console.log('Data successfully submitted');
-            progressBar.style.width = '100%';
-            progressBar.setAttribute('aria-valuenow', '100');
-            setTimeout(() => {
-              bootstrapModal.hide();
-            }, 300);  // Add slight delay to show the full progress
-            
-            this.dispatchEvent(new CustomEvent('formSubmitted', {
-              detail: {
-                userId: this.userId,
-                ...data
-              },
-              bubbles: true,
-              composed: true
-            }));
-          } else {
-            console.error('Error submitting data');
-            progressBar.style.width = '100%';
-            progressBar.setAttribute('aria-valuenow', '100');
-            setTimeout(() => {
-              bootstrapModal.hide();
-            }, 300);
-          }
-        } catch (error) {
-          console.error('Error submitting data:', error);
+
+    // Append the modal HTML to the document body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    const modalElement = document.getElementById('teamModalForm');
+    const form = document.getElementById('studentForm');
+    const titleInput = form.querySelector('#titleInput');
+    const universityInput = form.querySelector('#universityInput');
+    const majorInput = form.querySelector('#majorInput');
+    const professorInput = form.querySelector('#professorInput');
+    const progressBar = modalElement.querySelector('.progress-bar');
+    const progressFooter = modalElement.querySelector('#progressFooter');
+
+    modalElement.addEventListener('show.bs.modal', (event) => {
+      const button = event.relatedTarget;
+      this.userId = button.getAttribute('data-bs-userid');
+
+      titleInput.value = '';
+      universityInput.value = '';
+      majorInput.value = '';
+      professorInput.value = '';
+    });
+
+    // Form submission handling
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const data = {
+        title: titleInput.value,
+        university: universityInput.value,
+        major: majorInput.value,
+        professor: professorInput.value,
+      };
+
+      // Show the progress bar and set it to 50%
+      progressFooter.style.display = 'block';
+      progressBar.style.width = '50%';
+      progressBar.setAttribute('aria-valuenow', '50');
+
+      // Send form data with the userId as part of the URL path
+      try {
+        const response = await fetch(`https://your-api-url.com/users/${this.userId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const bootstrapModal = bootstrap.Modal.getInstance(modalElement);
+
+        if (response.ok) {
+          console.log('Data successfully submitted');
           progressBar.style.width = '100%';
           progressBar.setAttribute('aria-valuenow', '100');
-          const bootstrapModal = bootstrap.Modal.getInstance(modalElement);
+          setTimeout(() => {
+            bootstrapModal.hide();
+          }, 300);  // Add slight delay to show the full progress
+        } else {
+          console.error('Error submitting data');
+          progressBar.style.width = '100%';
+          progressBar.setAttribute('aria-valuenow', '100');
           setTimeout(() => {
             bootstrapModal.hide();
           }, 300);
-        } finally {
-          // Reset the progress bar and hide after completion
-          setTimeout(() => {
-            progressFooter.style.display = 'none';
-            progressBar.style.width = '0%';
-            progressBar.setAttribute('aria-valuenow', '0');
-          }, 500);
         }
-      });
-    }
+      } catch (error) {
+        console.error('Error submitting data:', error);
+        progressBar.style.width = '100%';
+        progressBar.setAttribute('aria-valuenow', '100');
+        const bootstrapModal = bootstrap.Modal.getInstance(modalElement);
+        setTimeout(() => {
+          bootstrapModal.hide();
+        }, 300);
+      } finally {
+        // Reset the progress bar and hide after completion
+        setTimeout(() => {
+          progressFooter.style.display = 'none';
+          progressBar.style.width = '0%';
+          progressBar.setAttribute('aria-valuenow', '0');
+        }, 500);
+        this.emitEvent(this.userId, data)
+      }
+    });
   }
-  
-  // Register the custom element
-  customElements.define('team-modal-form', TeamModalForm);
-  
+  emitEvent(userId, data) {
+    this.dispatchEvent(new CustomEvent('team-form-submitted', {
+      detail: {
+        userId: userId,
+        ...data
+      },
+      bubbles: true,
+      composed: true
+    }))
+  }
+}
+
+// Register the custom element
+customElements.define('team-modal-form', TeamModalForm);
