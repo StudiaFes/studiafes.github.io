@@ -58,7 +58,7 @@
 
     <script>
         document.addEventListener('team-form-submitted', (event) => {
-            const { title, university, major, professor } = event.detail;
+            const { title, university, major, professor, numPeople } = event.detail;
 
             // Find the target <ul> list
             const ul = document.querySelector('.list-group');
@@ -70,7 +70,7 @@
             // Customize the content of the new <li>
             li.innerHTML = `
                     <student-team-card title="${title}" professor="${professor}" 
-                        university="${university}" major="${major}">
+                        university="${university}" major="${major}" num-people="${numPeople}">
                     </student-team-card>
                 `;
 

@@ -13,27 +13,30 @@ class TeamModalForm extends HTMLElement {
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="teamModalFormLabel">Edit Team Information</h5>
+                <h5 class="modal-title" id="teamModalFormLabel">Crea un team</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <h6 class="mb-4">Please fill in the details below:</h6>
                 <form id="studentForm">
                   <div class="form-group mb-3">
-                    <label for="titleInput">Title</label>
+                    <label for="titleInput">Nome del team</label>
                     <input type="text" class="form-control" id="titleInput" required>
                   </div>
                   <div class="form-group mb-3">
-                    <label for="universityInput">University</label>
+                    <label for="universityInput">Università</label>
                     <input type="text" class="form-control" id="universityInput" required>
                   </div>
                   <div class="form-group mb-3">
-                    <label for="majorInput">Major</label>
+                    <label for="majorInput">Facoltà</label>
                     <input type="text" class="form-control" id="majorInput" required>
                   </div>
                   <div class="form-group mb-3">
-                    <label for="professorInput">Professor</label>
+                    <label for="professorInput">Professore</label>
                     <input type="text" class="form-control" id="professorInput" required>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="numPeopleInput">Numero di persone</label>
+                    <input type="number" class="form-control" id="numPeopleInput" required>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -60,6 +63,7 @@ class TeamModalForm extends HTMLElement {
     const universityInput = form.querySelector('#universityInput');
     const majorInput = form.querySelector('#majorInput');
     const professorInput = form.querySelector('#professorInput');
+    const numPeopleInput = form.querySelector('#numPeopleInput');
     const progressBar = modalElement.querySelector('.progress-bar');
     const progressFooter = modalElement.querySelector('#progressFooter');
 
@@ -71,6 +75,7 @@ class TeamModalForm extends HTMLElement {
       universityInput.value = '';
       majorInput.value = '';
       professorInput.value = '';
+      numPeopleInput.value = '';
     });
 
     // Form submission handling
@@ -82,6 +87,7 @@ class TeamModalForm extends HTMLElement {
         university: universityInput.value,
         major: majorInput.value,
         professor: professorInput.value,
+        numPeople: numPeopleInput.value
       };
 
       // Show the progress bar and set it to 50%
