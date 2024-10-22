@@ -14,11 +14,6 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.min.css">
-    <style>
-        .scrollable-list {
-            overflow-y: auto;
-        }
-    </style>
 </head>
 
 <body>
@@ -30,10 +25,21 @@
 </body>
 
 <script>
-    document.addEventListener('team-data', (event) => {
-        const dynamicAppBar = document.querySelector('dynamic-app-bar');
-        dynamicAppBar.setAttribute('title', event.detail.teamName);
-    })
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Extract 'teamName' from the URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const teamName = urlParams.get('teamName');
+        
+        if (teamName) {
+            // Decode the 'teamName' parameter
+            const decodedTeamName = decodeURIComponent(teamName);
+            // Set the 'title' attribute of the dynamic-app-bar
+            const dynamicAppBar = document.querySelector('dynamic-app-bar');
+            if (dynamicAppBar) {
+                dynamicAppBar.setAttribute('title', decodedTeamName);
+            }
+        }
+    });
 </script>
 
 </html>

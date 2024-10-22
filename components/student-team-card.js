@@ -110,7 +110,7 @@ class StudentTeamCard extends HTMLElement {
     // Listen for custom events from the modal
     joinTeamModal.addEventListener('join-team-confirmed', (event) => {
       console.log('User confirmed joining the team:', event.detail);
-      window.location.href = `/html/team/student-team.html?teamId=${encodeURIComponent(this.teamId)}`;
+      window.location.href = `/html/team/student-team.html?teamId=${encodeURIComponent(this.teamId)}&teamName=${encodeURIComponent(teamName)}`;
     });
 
     joinTeamModal.addEventListener('join-team-declined', (event) => {
