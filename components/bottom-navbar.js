@@ -5,6 +5,7 @@ class BottomNav extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
+        <team-modal-form></team-modal-form>
             <nav class="navbar fixed-bottom navbar-light bg-light">
                 <div class="container-fluid d-flex justify-content-around">
                     <button type="button" class="btn btn-light" id="home-button">

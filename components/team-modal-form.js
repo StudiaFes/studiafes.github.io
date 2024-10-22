@@ -10,7 +10,7 @@ class TeamModalForm extends HTMLElement {
   render() {
     const modalHTML = `
         <div class="modal fade" id="teamModalForm" tabindex="-1" aria-labelledby="teamModalFormLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-dialog modal-fullscreen-sm-down">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="teamModalFormLabel">Crea un team</h5>
@@ -46,15 +46,19 @@ class TeamModalForm extends HTMLElement {
                     <label for="examInput">Esame</label>
                     <input type="text" class="form-control" id="examInput" required>
                   </div>
-                  <div class="modal-footer">
+                  <!-- Buttons Footer -->
+                  <div class="modal-footer" id="buttonFooter">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                     <button type="submit" class="btn btn-primary">Salva</button>
                   </div>
                 </form>
               </div>
+              <!-- Progress Bar Footer -->
               <div class="modal-footer" id="progressFooter" style="display: none;">
                 <div class="progress w-100">
-                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+                       aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,18 +80,25 @@ class TeamModalForm extends HTMLElement {
     const examInput = form.querySelector('#examInput');
     const progressBar = modalElement.querySelector('.progress-bar');
     const progressFooter = modalElement.querySelector('#progressFooter');
+    const buttonFooter = modalElement.querySelector('#buttonFooter');
 
+    // Modal show event to reset form fields and UI elements
     modalElement.addEventListener('show.bs.modal', (event) => {
       const button = event.relatedTarget;
       this.userId = button.getAttribute('data-bs-userid');
 
-      teamNameInput.value = '';
-      universityInput.value = '';
-      majorInput.value = '';
-      professorInput.value = '';
-      numPeopleInput.value = '';
-      dateInput.value = '';
-      examInput.value = '';
+      // Reset form fields
+      form.reset();
+
+      // Show the button footer
+      buttonFooter.style.display = 'flex';
+
+      // Hide the progress footer
+      progressFooter.style.display = 'none';
+
+      // Reset the progress bar
+      progressBar.style.width = '0%';
+      progressBar.setAttribute('aria-valuenow', '0');
     });
 
     // Form submission handling
@@ -101,8 +112,11 @@ class TeamModalForm extends HTMLElement {
         professor: professorInput.value,
         numPeople: numPeopleInput.value,
         examDate: dateInput.value,
-        teamName: dateInput.value
+        teamName: teamNameInput.value  // Corrected to use the team name input
       };
+
+      // Hide the button footer
+      buttonFooter.style.display = 'none';
 
       // Show the progress bar and set it to 50%
       progressFooter.style.display = 'block';
@@ -150,11 +164,14 @@ class TeamModalForm extends HTMLElement {
           progressFooter.style.display = 'none';
           progressBar.style.width = '0%';
           progressBar.setAttribute('aria-valuenow', '0');
+          // Show the button footer again if needed
+          // buttonFooter.style.display = 'flex';
         }, 500);
         this.emitEvent(data);
       }
     });
   }
+
   emitEvent(data) {
     this.dispatchEvent(new CustomEvent('team-form-submitted', {
       detail: data,

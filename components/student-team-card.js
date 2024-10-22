@@ -50,7 +50,8 @@ class StudentTeamCard extends HTMLElement {
 
     // Add Bootstrap styles and card structure inside the shadow DOM
     this.shadowRoot.innerHTML = `
-      <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+      <!-- Include Bootstrap CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
       <style>
           .circle {
             width: 80px;
@@ -61,26 +62,57 @@ class StudentTeamCard extends HTMLElement {
           .card {
             cursor: pointer;
           }
-        </style>
+      </style>
 
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title text-center">${cardTitle}</h5>
-            <div class="d-flex justify-content-center">
-              ${circlesHTML}
-            </div>
-            <p class="card-text"><strong>Università:</strong> ${university}</p>
-            <p class="card-text"><strong>Facoltà:</strong> ${major}</p>
-            ${professorHTML}
-            ${examDateHTML}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title text-center">${cardTitle}</h5>
+          <div class="d-flex justify-content-center">
+            ${circlesHTML}
           </div>
+          <p class="card-text"><strong>Università:</strong> ${university}</p>
+          <p class="card-text"><strong>Facoltà:</strong> ${major}</p>
+          ${professorHTML}
+          ${examDateHTML}
         </div>
+      </div>
     `;
 
     // Add event listener to the card
     const cardElement = this.shadowRoot.querySelector('.card');
-    cardElement.addEventListener('click', () => {
+    cardElement.addEventListener('click', (event) => {
+      // Prevent any default action
+      event.preventDefault();
+
+      // Create and show the joinTeamModal
+      this.showJoinTeamModal(teamName, examName);
+    });
+  }
+
+  // Method to create and display the joinTeamModal
+  showJoinTeamModal(teamName, examName) {
+    // Create the join-team-modal element
+    const joinTeamModal = document.createElement('join-team-modal');
+    joinTeamModal.setAttribute('teamName', teamName);
+    joinTeamModal.setAttribute('examName', examName);
+
+    // Append it to the body
+    document.body.appendChild(joinTeamModal);
+
+    // Listen for modal closure to remove the element from the DOM
+    joinTeamModal.addEventListener('hidden.bs.modal', () => {
+      joinTeamModal.remove();
+    });
+
+    // Listen for custom events from the modal
+    joinTeamModal.addEventListener('join-team-confirmed', (event) => {
+      console.log('User confirmed joining the team:', event.detail);
       window.location.href = `/html/team/student-team.html?teamName=${encodeURIComponent(teamName)}&examName=${encodeURIComponent(examName)}`;
+    });
+
+    joinTeamModal.addEventListener('join-team-declined', (event) => {
+      console.log('User declined to join the team:', event.detail);
+      // Handle the user's decline if necessary
     });
   }
 }
