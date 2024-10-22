@@ -19,8 +19,8 @@ class TeamModalForm extends HTMLElement {
               <div class="modal-body">
                 <form id="studentForm">
                   <div class="form-group mb-3">
-                    <label for="titleInput">Nome del team</label>
-                    <input type="text" class="form-control" id="titleInput" required>
+                    <label for="teamNameInput">Nome del team</label>
+                    <input type="text" class="form-control" id="teamNameInput" required>
                   </div>
                   <div class="form-group mb-3">
                     <label for="universityInput">Università</label>
@@ -38,9 +38,17 @@ class TeamModalForm extends HTMLElement {
                     <label for="numPeopleInput">Numero di persone</label>
                     <input type="number" class="form-control" id="numPeopleInput" required>
                   </div>
+                  <div class="form-group mb-3">
+                    <label for="dateInput">Appello</label>
+                    <input type="date" class="form-control" id="dateInput" required>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="examInput">Esame</label>
+                    <input type="text" class="form-control" id="examInput" required>
+                  </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    <button type="submit" class="btn btn-primary">Salva</button>
                   </div>
                 </form>
               </div>
@@ -59,11 +67,13 @@ class TeamModalForm extends HTMLElement {
 
     const modalElement = document.getElementById('teamModalForm');
     const form = document.getElementById('studentForm');
-    const titleInput = form.querySelector('#titleInput');
+    const teamNameInput = form.querySelector('#teamNameInput');
     const universityInput = form.querySelector('#universityInput');
     const majorInput = form.querySelector('#majorInput');
     const professorInput = form.querySelector('#professorInput');
     const numPeopleInput = form.querySelector('#numPeopleInput');
+    const dateInput = form.querySelector('#dateInput');
+    const examInput = form.querySelector('#examInput');
     const progressBar = modalElement.querySelector('.progress-bar');
     const progressFooter = modalElement.querySelector('#progressFooter');
 
@@ -71,23 +81,27 @@ class TeamModalForm extends HTMLElement {
       const button = event.relatedTarget;
       this.userId = button.getAttribute('data-bs-userid');
 
-      titleInput.value = '';
+      teamNameInput.value = '';
       universityInput.value = '';
       majorInput.value = '';
       professorInput.value = '';
       numPeopleInput.value = '';
+      dateInput.value = '';
+      examInput.value = '';
     });
 
     // Form submission handling
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-
       const data = {
-        title: titleInput.value,
+        userId: this.userId,
+        examName: examInput.value,
         university: universityInput.value,
         major: majorInput.value,
         professor: professorInput.value,
-        numPeople: numPeopleInput.value
+        numPeople: numPeopleInput.value,
+        examDate: dateInput.value,
+        teamName: dateInput.value
       };
 
       // Show the progress bar and set it to 50%
@@ -137,19 +151,16 @@ class TeamModalForm extends HTMLElement {
           progressBar.style.width = '0%';
           progressBar.setAttribute('aria-valuenow', '0');
         }, 500);
-        this.emitEvent(this.userId, data)
+        this.emitEvent(data);
       }
     });
   }
-  emitEvent(userId, data) {
+  emitEvent(data) {
     this.dispatchEvent(new CustomEvent('team-form-submitted', {
-      detail: {
-        userId: userId,
-        ...data
-      },
+      detail: data,
       bubbles: true,
       composed: true
-    }))
+    }));
   }
 }
 

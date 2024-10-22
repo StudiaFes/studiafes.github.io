@@ -7,7 +7,7 @@ class StudentTeamCard extends HTMLElement {
 
   // Observe changes to these attributes
   static get observedAttributes() {
-    return ['title', 'university', 'major', 'professor', 'num-people'];
+    return ['team-name', 'exam-name', 'university', 'major', 'professor', 'num-people', 'exam-date'];
   }
 
   // Called when one of the observed attributes changes
@@ -22,16 +22,30 @@ class StudentTeamCard extends HTMLElement {
 
   // Render the Bootstrap card
   render() {
-    const cardTitle = this.getAttribute("title") || '';
+    const teamName = this.getAttribute("team-name") || '';
+    const examName = this.getAttribute("exam-name") || '';
+    const cardTitle = `${teamName} - ${examName}`;
     const university = this.getAttribute("university") || '';
     const major = this.getAttribute("major") || '';
-    const professor = this.getAttribute("professor") || '';
+    const professor = this.getAttribute("professor");
+    const examDate = this.getAttribute("exam-date");
     const numPeople = parseInt(this.getAttribute("num-people")) || 2;
 
     // Generate the circles
     let circlesHTML = '';
     for (let i = 0; i < numPeople; i++) {
       circlesHTML += '<div class="circle bg-secondary border-2"></div>';
+    }
+
+    // Optional professor and examDate sections
+    let professorHTML = '';
+    if (professor) {
+      professorHTML = `<p class="card-text"><strong>Professore:</strong> ${professor}</p>`;
+    }
+
+    let examDateHTML = '';
+    if (examDate) {
+      examDateHTML = `<p class="card-text"><strong>Appello:</strong> ${examDate}</p>`;
     }
 
     // Add Bootstrap styles and card structure inside the shadow DOM
@@ -44,6 +58,9 @@ class StudentTeamCard extends HTMLElement {
             border-radius: 50%;
             margin: 10px;
           }
+          .card {
+            cursor: pointer;
+          }
         </style>
 
         <div class="card mb-3">
@@ -54,10 +71,17 @@ class StudentTeamCard extends HTMLElement {
             </div>
             <p class="card-text"><strong>Università:</strong> ${university}</p>
             <p class="card-text"><strong>Facoltà:</strong> ${major}</p>
-            <p class="card-text"><strong>Professore:</strong> ${professor}</p>
+            ${professorHTML}
+            ${examDateHTML}
           </div>
         </div>
     `;
+
+    // Add event listener to the card
+    const cardElement = this.shadowRoot.querySelector('.card');
+    cardElement.addEventListener('click', () => {
+      window.location.href = `/html/team/student-team.html?teamName=${encodeURIComponent(teamName)}&examName=${encodeURIComponent(examName)}`;
+    });
   }
 }
 

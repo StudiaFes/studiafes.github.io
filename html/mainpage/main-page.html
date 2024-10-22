@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudiaFes</title>
     <script src="/components/student-team-card.js"></script>
-    <script src="/components/contact-modal.js"></script>
     <script src="/components/dynamic-app-bar.js"></script>
     <script src="/components/bottom-navbar.js"></script>
     <script src="/components/team-modal-form.js"></script>
@@ -26,57 +25,52 @@
     <dynamic-app-bar title="Esami in corso"></dynamic-app-bar>
     <div class="container-fluid dynamic-margin">
         <ul class="list-group overflow-auto mt-2 pb-2 scrollable-list">
-            <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#contactModal"
-                data-bs-name="GianSofia" data-bs-surname="Marjini" data-bs-email="gian.sofia@example.com"
-                data-bs-phone="123-456-7890">
-                <student-team-card title="Analisi 1-GianSofia" professor="prof. Tartaglia"
-                    university="Università di Brescia" major="Matematica"></student-team-card>
-            </li>
-            <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#contactModal"
-                data-bs-name="GianSofia" data-bs-surname="Marjini" data-bs-email="gian.sofia@example.com"
-                data-bs-phone="123-456-7890">
-                <student-team-card title="Diritto Civile-Pier pierino" professor="prof. Iuris Civilis"
-                    university="Università di Crotone" major="Giurisprudenza"></student-team-card>
-            </li>
-            <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#contactModal"
-                data-bs-name="GianSofia" data-bs-surname="Marjini" data-bs-email="gian.sofia@example.com"
-                data-bs-phone="123-456-7890">
-                <student-team-card title="Meccanica Razionale-PierGiacomo" professor="prof.ssa Mec Raz"
-                    university="Università di Bologna" major="Ingegneria Elettrica"></student-team-card>
-            </li>
-            <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#contactModal"
-                data-bs-name="GianSofia" data-bs-surname="Marjini" data-bs-email="gian.sofia@example.com"
-                data-bs-phone="123-456-7890">
-                <student-team-card title="Anatomia-Gianni" professor="prof. Epi Glottide"
-                    university="Università di Brescia" major="Medicina"></student-team-card>
+            <li class="list-group-item border-0">
+                <student-team-card team-name="Nome bello" exam-name="Fisica II" exam-date="20/04/2025"
+                    major="Ingegneria Meccanica" professor="prof. P. Pallo" num-people="2"></student-team-card>
             </li>
         </ul>
     </div>
-    <contact-modal></contact-modal>
     <team-modal-form></team-modal-form>
     <bottom-nav></bottom-nav>
 
     <script>
         document.addEventListener('team-form-submitted', (event) => {
-            const { title, university, major, professor, numPeople } = event.detail;
+            // Create an instance of TeamFormData from the event detail
+            const { numPeople, teamName, examName, professor, university, major, examDate } = event.detail;
+
 
             // Find the target <ul> list
             const ul = document.querySelector('.list-group');
 
-            // Create a new <li> element with the team details
+            if (!ul) {
+                console.error('The <ul> element with class "list-group" was not found.');
+                return;
+            }
+
+            // Create a new <li> element
             const li = document.createElement('li');
             li.classList.add('list-group-item', 'border-0');
 
-            // Customize the content of the new <li>
-            li.innerHTML = `
-                    <student-team-card title="${title}" professor="${professor}" 
-                        university="${university}" major="${major}" num-people="${numPeople}">
-                    </student-team-card>
-                `;
+            // Create a new student-team-card element
+            const teamCard = document.createElement('student-team-card');
 
-            // Append the new <li> to the <ul>
+            // Set attributes on the student-team-card using data from teamFormData
+            teamCard.setAttribute('team-name', teamName);
+            teamCard.setAttribute('professor', professor);
+            teamCard.setAttribute('university', university);
+            teamCard.setAttribute('major', major);
+            teamCard.setAttribute('num-people', numPeople);
+            teamCard.setAttribute('exam-date', examDate);
+            teamCard.setAttribute('exam-name', examName);
+
+            // Append the student-team-card to the <li>
+            li.appendChild(teamCard);
+
+            // Prepend the new <li> to the <ul>
             ul.prepend(li);
         });
+
 
         function openPage(ref) {
             // Construct the URL with the id as a query parameter

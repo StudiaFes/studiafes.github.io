@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StudiaFes</title>
+    <script src="/components/contact-modal.js"></script>
+    <script src="/components/dynamic-app-bar.js"></script>
+    <script src="/components/bottom-navbar.js"></script>
+    <script src="/components/team-modal-form.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/max-height-scrollable-list.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.min.css">
+    <style>
+        .scrollable-list {
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <dynamic-app-bar title=""></dynamic-app-bar>
+
+    <team-modal-form></team-modal-form>
+    <bottom-nav></bottom-nav>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const params = new URLSearchParams(window.location.search);
+        const teamName = params.get('teamName') || 'Default Title';
+
+        const dynamicAppBar = document.querySelector('dynamic-app-bar');
+        dynamicAppBar.setAttribute('title', teamName);
+    });
+
+</script>
+
+</html>

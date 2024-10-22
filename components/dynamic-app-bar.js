@@ -2,9 +2,18 @@ class DynamicAppBar extends HTMLElement {
     constructor() {
         super();
     }
-
+    attributeChangedCallback(name, oldValue, newValue) {
+        this.render(newValue)
+    }
     // Called when the component is added to the document
     connectedCallback() {
+
+        // Get the title attribute and update the navbar title
+        const title = this.getAttribute('title') || 'Default Title';
+        this.render(title);
+    }
+
+    render(title) {
         // Create the navbar HTML structure with a dynamic title
         this.innerHTML = `
             <nav class="navbar navbar-light bg-light fixed-top navbar-bg">
@@ -12,10 +21,7 @@ class DynamicAppBar extends HTMLElement {
                     <span class="navbar-brand mb-0 h1" id="navbar-title">Default Title</span>
                 </div>
             </nav>
-        `;
-
-        // Get the title attribute and update the navbar title
-        const title = this.getAttribute('title') || 'Default Title';
+            `;
         this.querySelector('#navbar-title').textContent = title;
     }
 
