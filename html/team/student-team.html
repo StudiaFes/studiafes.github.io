@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudiaFes</title>
-    <script src="/components/contact-modal.js"></script>
+    <script src="/components/team-detail.js"></script>
+    <script src="/components/centered-div.js"></script>
     <script src="/components/dynamic-app-bar.js"></script>
     <script src="/components/bottom-navbar.js"></script>
-    <script src="/components/team-modal-form.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/max-height-scrollable-list.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
@@ -23,20 +23,17 @@
 
 <body>
     <dynamic-app-bar title=""></dynamic-app-bar>
-
-    <team-modal-form></team-modal-form>
+    <centered-div>
+        <team-detail></team-detail>
+    </centered-div>
     <bottom-nav></bottom-nav>
 </body>
 
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const params = new URLSearchParams(window.location.search);
-        const teamName = params.get('teamName') || 'Default Title';
-
+    document.addEventListener('team-data', (event) => {
         const dynamicAppBar = document.querySelector('dynamic-app-bar');
-        dynamicAppBar.setAttribute('title', teamName);
-    });
-
+        dynamicAppBar.setAttribute('title', event.detail.teamName);
+    })
 </script>
 
 </html>

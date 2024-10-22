@@ -9,7 +9,7 @@ class DynamicAppBar extends HTMLElement {
     connectedCallback() {
 
         // Get the title attribute and update the navbar title
-        const title = this.getAttribute('title') || 'Default Title';
+        const title = this.getAttribute('title') || '';
         this.render(title);
     }
 

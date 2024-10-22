@@ -1,13 +1,15 @@
 class StudentTeamCard extends HTMLElement {
   constructor() {
     super();
+    //TODO
+    this.teamId = 'some-team-id'
     // Attach shadow DOM
     this.attachShadow({ mode: 'open' });
   }
 
   // Observe changes to these attributes
   static get observedAttributes() {
-    return ['team-name', 'exam-name', 'university', 'major', 'professor', 'num-people', 'exam-date'];
+    return ['team-name', 'exam-name', 'university', 'major', 'professor', 'num-people', 'exam-date', 'team-id'];
   }
 
   // Called when one of the observed attributes changes
@@ -22,6 +24,7 @@ class StudentTeamCard extends HTMLElement {
 
   // Render the Bootstrap card
   render() {
+    this.teamId = this.getAttribute("team-id") || this.teamId
     const teamName = this.getAttribute("team-name") || '';
     const examName = this.getAttribute("exam-name") || '';
     const cardTitle = `${teamName} - ${examName}`;
@@ -51,7 +54,7 @@ class StudentTeamCard extends HTMLElement {
     // Add Bootstrap styles and card structure inside the shadow DOM
     this.shadowRoot.innerHTML = `
       <!-- Include Bootstrap CSS -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
       <style>
           .circle {
             width: 80px;
@@ -107,7 +110,7 @@ class StudentTeamCard extends HTMLElement {
     // Listen for custom events from the modal
     joinTeamModal.addEventListener('join-team-confirmed', (event) => {
       console.log('User confirmed joining the team:', event.detail);
-      window.location.href = `/html/team/student-team.html?teamName=${encodeURIComponent(teamName)}&examName=${encodeURIComponent(examName)}`;
+      window.location.href = `/html/team/student-team.html?teamId=${encodeURIComponent(this.teamId)}`;
     });
 
     joinTeamModal.addEventListener('join-team-declined', (event) => {
